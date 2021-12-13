@@ -1,0 +1,23 @@
+.Navbar{
+    background-color: white !important;
+    border-radius: 10px;
+}
+.nav-item:hover{
+    border-radius: 10px !important;
+    background-color: rgb(224, 224, 224) !important;
+}
+.searchInput{
+    background-color: rgb(224, 224, 224) !important;
+    border-radius: 15px;
+}
+.btn{
+    border: 0px !important;
+    background-color: white !important;
+    color: black !important;
+    border-radius: 10px !important;
+}
+.btn:hover{
+    background-color: rgb(90, 88, 88) !important;
+    color: white !important;
+}
+
