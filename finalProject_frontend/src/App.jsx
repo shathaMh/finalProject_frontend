@@ -11,8 +11,11 @@ import Parks from "./Components/Parks/Parks";
 import Profile from "./Components/Profile/Profile";
 import Cart from "./Components/Cart/Cart";
 import Welcome from "./Components/welcome/Welcome";
+require("dotenv").config();
 
 export default function App() {
+  console.log(process.env.REACT_APP_BACKEND_URL);
+  
   const [ImagesArray, setImagesArray] = useState([]);
   const [isAdmin, setAdmin] = useState(false);
   const [token, settoken] = useState(localStorage.getItem("token"));
@@ -59,7 +62,7 @@ export default function App() {
   async function getData() {
     //res.data
     let { data } = await axios.get(
-      `https://riyadh-season.herokuapp.com/party`,
+      `${process.env.REACT_APP_BACKEND_URL}/party`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -70,7 +73,7 @@ export default function App() {
 
   async function checkCart() {
     let response = await axios.get(
-      `https://riyadh-season.herokuapp.com/reservation/${userEmail}`,
+      `${process.env.REACT_APP_BACKEND_URL}/reservation/${userEmail}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     setcartArray(response.data);
@@ -81,7 +84,7 @@ export default function App() {
   useEffect(async () => {
     try {
       let { data } = await axios.get(
-        `https://riyadh-season.herokuapp.com/party`,
+        `${process.env.REACT_APP_BACKEND_URL}/party`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setImagesArray(data);
@@ -102,7 +105,7 @@ export default function App() {
     // نرفع البيانات لقاعدة البيانات
     try {
       const response = await axios.post(
-        "https://riyadh-season.herokuapp.com/signin",
+        "${process.env.REACT_APP_BACKEND_URL}/signin",
         userLogin
       );
       setlogOut(true);
@@ -136,12 +139,12 @@ export default function App() {
 
   const addToCart = async (id) => {
     let response = await axios.post(
-      `https://riyadh-season.herokuapp.com/reserve`,
+      `${process.env.REACT_APP_BACKEND_URL}/reserve`,
       { id: [id] },
       { headers: { Authorization: `Bearer ${token}` } }
     );
     let responseData = await axios.get(
-      `https://riyadh-season.herokuapp.com/reservation/${userEmail}`,
+      `${process.env.REACT_APP_BACKEND_URL}/reservation/${userEmail}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     settoken(response.data.token)
